@@ -8,6 +8,7 @@
     "hono": "^4.4.2"
   },
   "devDependencies": {
-    "vercel": "^32.4.1"
+    "vercel": "^32.4.1",
+    "prettier": "^3.3.3"
   }
 }
