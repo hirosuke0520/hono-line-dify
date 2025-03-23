@@ -136,8 +136,3 @@ export type WebhookBody = {
   destination: string
   events: WebhookEvent[]
 }
-
-export type LineContent = {
-  blob: Blob
-  type: string
-}
