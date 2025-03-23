@@ -1,6 +1,6 @@
 import { put } from "@vercel/blob"
 
-import { extractExtensionFromContentType } from "../utils"
+import { extractExtensionFromContentType } from "../utils.js"
 
 export const uploadToBlobStorage = async (messageId: string, blob: Blob) => {
   try {
