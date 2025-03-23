@@ -1,20 +1,20 @@
 // 1. 共通のベースとなる型定義
 export interface BaseEvent {
-  type: string;
-  timestamp: number;
+  type: string
+  timestamp: number
   source: {
-    type: "user" | "group" | "room";
-    userId?: string;
-    groupId?: string;
-    roomId?: string;
-  };
+    type: "user" | "group" | "room"
+    userId?: string
+    groupId?: string
+    roomId?: string
+  }
 }
 
 // 2. 各イベントの型定義（例として主要なイベントのみ）
 export interface MessageEvent extends BaseEvent {
-  type: "message";
-  replyToken: string;
-  message: Message;
+  type: "message"
+  replyToken: string
+  message: Message
 }
 
 export type Message =
@@ -22,95 +22,103 @@ export type Message =
   | ImageMessage
   | VideoMessage
   | AudioMessage
+  | FileMessage
   | LocationMessage
-  | StickerMessage;
+  | StickerMessage
 
 interface BaseMessage {
-  id: string;
-  type: string;
+  id: string
+  type: string
 }
 
 interface TextMessage extends BaseMessage {
-  type: "text";
-  text: string;
+  type: "text"
+  text: string
 }
 
 interface ImageMessage extends BaseMessage {
-  type: "image";
+  type: "image"
   // 画像用の追加プロパティ（例: content providerなど）を必要に応じて定義
 }
 
 interface VideoMessage extends BaseMessage {
-  type: "video";
+  type: "video"
   // 動画用の追加プロパティ
 }
 
 interface AudioMessage extends BaseMessage {
-  type: "audio";
+  type: "audio"
   // 音声用の追加プロパティ
 }
 
+interface FileMessage extends BaseMessage {
+  type: "file"
+  fileName: string
+  fileSize: number
+  // ファイル用の追加プロパティ
+}
+
 interface LocationMessage extends BaseMessage {
-  type: "location";
-  title: string;
-  address: string;
-  latitude: number;
-  longitude: number;
+  type: "location"
+  title: string
+  address: string
+  latitude: number
+  longitude: number
 }
 
 interface StickerMessage extends BaseMessage {
-  type: "sticker";
-  packageId: string;
-  stickerId: string;
+  type: "sticker"
+  packageId: string
+  stickerId: string
 }
 
 interface FollowEvent extends BaseEvent {
-  type: "follow";
-  replyToken: string;
+  type: "follow"
+  replyToken: string
 }
 
 interface UnfollowEvent extends BaseEvent {
-  type: "unfollow";
+  type: "unfollow"
 }
 
 interface JoinEvent extends BaseEvent {
-  type: "join";
-  replyToken: string;
+  type: "join"
+  replyToken: string
 }
 
 interface LeaveEvent extends BaseEvent {
-  type: "leave";
+  type: "leave"
 }
 
 interface PostbackEvent extends BaseEvent {
-  type: "postback";
-  replyToken: string;
+  type: "postback"
+  replyToken: string
   postback: {
-    data: string;
+    data: string
     params?: {
-      date?: string;
-      time?: string;
-      datetime?: string;
-    };
-  };
+      date?: string
+      time?: string
+      datetime?: string
+    }
+  }
 }
 
 interface BeaconEvent extends BaseEvent {
-  type: "beacon";
-  replyToken: string;
+  type: "beacon"
+  replyToken: string
   beacon: {
-    hwid: string;
-    type: "enter" | "leave";
-  };
+    hwid: string
+    type: "enter" | "leave"
+  }
 }
 
 interface AccountLinkEvent extends BaseEvent {
-  type: "accountLink";
-  replyToken: string;
+  type: "accountLink"
+  replyToken: string
   accountLink: {
-    result: string;
-    nonce: string;
-  };
+    result: string
+    nonce: string
+  }
 }
 
 // 3. Webhook全体のイベント型（Union型）
@@ -122,9 +130,14 @@ export type WebhookEvent =
   | LeaveEvent
   | PostbackEvent
   | BeaconEvent
-  | AccountLinkEvent;
+  | AccountLinkEvent
 
 export type WebhookBody = {
-  destination: string;
-  events: WebhookEvent[];
-};
+  destination: string
+  events: WebhookEvent[]
+}
+
+export type LineContent = {
+  blob: Blob
+  type: string
+}
