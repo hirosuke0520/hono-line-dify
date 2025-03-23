@@ -137,6 +137,8 @@ export type WebhookBody = {
   events: WebhookEvent[]
 }
 
+export type DifyFileType = "document" | "image" | "audio" | "video" | "custom"
+
 export type DifyChatResponse = {
   event: string
   task_id: string
