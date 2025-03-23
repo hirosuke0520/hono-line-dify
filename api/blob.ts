@@ -11,9 +11,9 @@ export const uploadToBlobStorage = async (messageId: string, extension: string, 
   }
 }
 
-export const deleteStorageFile = async (messageId: string, extension: string): Promise<void> => {
+export const deleteStorageFile = async (url: string): Promise<void> => {
   try {
-    await del(`dify/tmp/${messageId}.${extension}`, { token: process.env.BLOB_READ_WRITE_TOKEN })
+    await del(url)
   } catch (error) {
     console.log(error)
   }
