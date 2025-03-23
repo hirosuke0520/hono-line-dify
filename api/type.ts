@@ -136,3 +136,17 @@ export type WebhookBody = {
   destination: string
   events: WebhookEvent[]
 }
+
+export type DifyChatResponse = {
+  event: string
+  task_id: string
+  id: string
+  message_id: string
+  conversation_id: string
+  mode: string
+  answer: string
+  metadata: {
+    usage: Object
+  }
+  created_at: number
+}
